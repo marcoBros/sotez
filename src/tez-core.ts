@@ -16,7 +16,7 @@ export default class AbstractTezModule implements TezModuleInterface {
     this._provider = provider;
     this._network = network;
     this._chain = chain;
-    this._defaultFee = options.defaultFee || 1278;
+    this._defaultFee = options.defaultFee || 1420;
   }
 
   get provider() {

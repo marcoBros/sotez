@@ -28,10 +28,10 @@ import {
  * Main tez.js Library
  * @class Sotez
  * @param {String} [provider='http://127.0.0.1:8732'] Address of the node
- * @param {String} [chain='main'] Chain Id
- * @param {String} [network='main'] Network ['main', 'zero',]
+ * @param {String} [chain='main'] Chain Id ['main', 'test']
+ * @param {String} [network='main'] Network ['main', 'zero', 'alpha']
  * @param {Object} [options={}]
- * @param {Number} [options.defaultFee=1278] The default fee for tranactions
+ * @param {Number} [options.defaultFee=1420] The default fee for tranactions
  * @param {Boolean} [options.debugMode=false] Debug mode enablement
  * @param {Boolean} [options.localForge=true] Forge operations locally
  * @param {Boolean} [options.validateLocalForge=false] Validate local forge bytes against remote forged bytes
@@ -124,6 +124,9 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
    * await sotez.importLedger();
    */
   importLedger = async (path: string = "44'/1729'/0'/0'", curve: number = 0x00) => {
+    if (curve !== 0x00) {
+      throw new Error('Only ed25519 curve (0x00) is supported for ledger at the moment.');
+    }
     const { publicKey } = await ledger.getAddress({
       path,
       displayConfirm: true,
@@ -229,8 +232,8 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
     delegatable,
     delegate,
     fee = this.defaultFee,
-    gasLimit = 10000,
-    storageLimit = 257,
+    gasLimit = 10600,
+    storageLimit = 300,
   }: AccountParams): Promise<any> => {
     const params: { spendable?: boolean; delegatable?: boolean; delegate?: string } = {};
     if (typeof spendable !== 'undefined') params.spendable = spendable;
@@ -503,9 +506,9 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
    * sotez.prepareOperation({
    *   operation: {
    *     kind: 'transaction',
-   *     fee: '50000',
-   *     gas_limit: '10200',
-   *     storage_limit: '0',
+   *     fee: '1420',
+   *     gas_limit: '10600',
+   *     storage_limit: '300',
    *     amount: '1000',
    *     destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
    *   }
@@ -543,11 +546,11 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
       if (requiresReveal && typeof manager.key === 'undefined') {
         const reveal: Operation = {
           kind: 'reveal',
-          fee: 1269,
+          fee: 1420,
           public_key: this.key.publicKey(),
           source: publicKeyHash,
-          gas_limit: 10000,
-          storage_limit: 0,
+          gas_limit: 10600,
+          storage_limit: 300,
         };
 
         ops.unshift(reveal);
@@ -632,9 +635,9 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
    * sotez.simulateOperation({
    *   operation: {
    *     kind: 'transaction',
-   *     fee: '50000',
-   *     gas_limit: '10200',
-   *     storage_limit: '0',
+   *     fee: '1420',
+   *     gas_limit: '10600',
+   *     storage_limit: '300',
    *     amount: '1000',
    *     destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
    *   },
@@ -655,9 +658,9 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
    * @example
    * const operation = {
    *   kind: 'transaction',
-   *   fee: '50000',
-   *   gas_limit: '10200',
-   *   storage_limit: '0',
+   *   fee: '1420',
+   *   gas_limit: '10600',
+   *   storage_limit: '300',
    *   amount: '1000',
    *   destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
    * };
@@ -764,7 +767,7 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
    * sotez.transfer({
    *   to: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
    *   amount: '1000000',
-   *   fee: '1278',
+   *   fee: '1420',
    * }).then(result => console.log(result))
    */
   transfer = ({
@@ -773,8 +776,8 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
     amount,
     parameter,
     fee = this.defaultFee,
-    gasLimit = 10500,
-    storageLimit = 0,
+    gasLimit = 10600,
+    storageLimit = 300,
     mutez = false,
     rawParam = false,
   }: RpcParams): Promise<any> => {
@@ -832,8 +835,8 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
     delegatable = false,
     delegate,
     fee = this.defaultFee,
-    gasLimit = 10000,
-    storageLimit = 257,
+    gasLimit = 10600,
+    storageLimit = 300,
   }: ContractParams): Promise<any> => {
     const _code = utility.ml2mic(code);
     const script = {
@@ -875,9 +878,9 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
   setDelegate = async ({
     delegate,
     source = this.key.publicKeyHash(),
-    fee = 1420,
-    gasLimit = 10000,
-    storageLimit = 0,
+    fee = this.defaultFee,
+    gasLimit = 10600,
+    storageLimit = 300,
   }: RpcParams): Promise<any> => {
     const operation = {
       kind: 'delegation',
@@ -900,8 +903,8 @@ export default class Sotez extends AbstractTezModule implements TezInterface {
    */
   registerDelegate = async ({
     fee = this.defaultFee,
-    gasLimit = 10000,
-    storageLimit = 0,
+    gasLimit = 10600,
+    storageLimit = 300,
   }: RpcParams): Promise<any> => {
     const operation = {
       kind: 'delegation',

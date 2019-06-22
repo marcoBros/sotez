@@ -577,10 +577,10 @@ declare module "web/tez-web" {
      * Main tez.js Library
      * @class Sotez
      * @param {String} [provider='http://127.0.0.1:8732'] Address of the node
-     * @param {String} [chain='main'] Chain Id
-     * @param {String} [network='main'] Network ['main', 'zero',]
+     * @param {String} [chain='main'] Chain Id ['main', 'test']
+     * @param {String} [network='main'] Network ['main', 'zero', 'alpha']
      * @param {Object} [options={}]
-     * @param {Number} [options.defaultFee=1278] The default fee for tranactions
+     * @param {Number} [options.defaultFee=1420] The default fee for tranactions
      * @param {Boolean} [options.debugMode=false] Debug mode enablement
      * @param {Boolean} [options.localForge=true] Forge operations locally
      * @param {Boolean} [options.validateLocalForge=false] Validate local forge bytes against remote forged bytes
@@ -827,9 +827,9 @@ declare module "web/tez-web" {
          * sotez.prepareOperation({
          *   operation: {
          *     kind: 'transaction',
-         *     fee: '50000',
-         *     gas_limit: '10200',
-         *     storage_limit: '0',
+         *     fee: '1420',
+         *     gas_limit: '10600',
+         *     storage_limit: '300',
          *     amount: '1000',
          *     destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
          *   }
@@ -845,9 +845,9 @@ declare module "web/tez-web" {
          * sotez.simulateOperation({
          *   operation: {
          *     kind: 'transaction',
-         *     fee: '50000',
-         *     gas_limit: '10200',
-         *     storage_limit: '0',
+         *     fee: '1420',
+         *     gas_limit: '10600',
+         *     storage_limit: '300',
          *     amount: '1000',
          *     destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
          *   },
@@ -863,9 +863,9 @@ declare module "web/tez-web" {
          * @example
          * const operation = {
          *   kind: 'transaction',
-         *   fee: '50000',
-         *   gas_limit: '10200',
-         *   storage_limit: '0',
+         *   fee: '1420',
+         *   gas_limit: '10600',
+         *   storage_limit: '300',
          *   amount: '1000',
          *   destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
          * };
@@ -904,7 +904,7 @@ declare module "web/tez-web" {
          * sotez.transfer({
          *   to: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
          *   amount: '1000000',
-         *   fee: '1278',
+         *   fee: '1420',
          * }).then(result => console.log(result))
          */
         transfer: ({ to, source, amount, parameter, fee, gasLimit, storageLimit, mutez, rawParam, }: RpcParams) => Promise<any>;
@@ -1006,10 +1006,10 @@ declare module "node/tez" {
      * Main tez.js Library
      * @class Sotez
      * @param {String} [provider='http://127.0.0.1:8732'] Address of the node
-     * @param {String} [chain='main'] Chain Id
-     * @param {String} [network='main'] Network ['main', 'zero',]
+     * @param {String} [chain='main'] Chain Id ['main', 'test']
+     * @param {String} [network='main'] Network ['main', 'zero', 'alpha']
      * @param {Object} [options={}]
-     * @param {Number} [options.defaultFee=1278] The default fee for tranactions
+     * @param {Number} [options.defaultFee=1420] The default fee for tranactions
      * @param {Boolean} [options.debugMode=false] Debug mode enablement
      * @param {Boolean} [options.localForge=true] Forge operations locally
      * @param {Boolean} [options.validateLocalForge=false] Validate local forge bytes against remote forged bytes
@@ -1256,9 +1256,9 @@ declare module "node/tez" {
          * sotez.prepareOperation({
          *   operation: {
          *     kind: 'transaction',
-         *     fee: '50000',
-         *     gas_limit: '10200',
-         *     storage_limit: '0',
+         *     fee: '1420',
+         *     gas_limit: '10600',
+         *     storage_limit: '300',
          *     amount: '1000',
          *     destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
          *   }
@@ -1274,9 +1274,9 @@ declare module "node/tez" {
          * sotez.simulateOperation({
          *   operation: {
          *     kind: 'transaction',
-         *     fee: '50000',
-         *     gas_limit: '10200',
-         *     storage_limit: '0',
+         *     fee: '1420',
+         *     gas_limit: '10600',
+         *     storage_limit: '300',
          *     amount: '1000',
          *     destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
          *   },
@@ -1292,9 +1292,9 @@ declare module "node/tez" {
          * @example
          * const operation = {
          *   kind: 'transaction',
-         *   fee: '50000',
-         *   gas_limit: '10200',
-         *   storage_limit: '0',
+         *   fee: '1420',
+         *   gas_limit: '10600',
+         *   storage_limit: '300',
          *   amount: '1000',
          *   destination: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
          * };
@@ -1333,7 +1333,7 @@ declare module "node/tez" {
          * sotez.transfer({
          *   to: 'tz1RvhdZ5pcjD19vCCK9PgZpnmErTba3dsBs',
          *   amount: '1000000',
-         *   fee: '1278',
+         *   fee: '1420',
          * }).then(result => console.log(result))
          */
         transfer: ({ to, source, amount, parameter, fee, gasLimit, storageLimit, mutez, rawParam, }: RpcParams) => Promise<any>;

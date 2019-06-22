@@ -55,7 +55,6 @@
     "@types/secp256k1": "^3.5.0",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
-    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "documentation": "^11.0.0",
     "eslint": "^5.15.1",
@@ -64,7 +63,6 @@
     "jest": "^24.8.0",
     "terser-webpack-plugin": "^1.2.2",
     "typescript": "^3.4.5",
-    "unminified-webpack-plugin": "^2.0.0",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-node-externals": "^1.7.2"
